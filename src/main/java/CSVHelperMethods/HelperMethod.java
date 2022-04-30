@@ -2,9 +2,8 @@ package CSVHelperMethods;
 
 import Model.User;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class HelperMethod {
@@ -21,16 +20,23 @@ public class HelperMethod {
     }
 
 
-    public List<String> filerByInsuranceCompany(List<User> userList, List<String> insuranceCompanies){
-        for(User user: userList)
-            if(!insuranceCompanies.contains(user.getInsuranceCompany()))
-                insuranceCompanies.add(user.getInsuranceCompany());
-        return insuranceCompanies;
+    public List<String> filerByInsuranceCompany(List<User> userList, List<String> companyList) {
+        for (User user : userList)
+            if (!(companyList.contains(user.getInsuranceCompany())))
+                companyList.add(user.getInsuranceCompany());
+        return companyList;
     }
 
-    public void mapCompanyToUser(User user, Map<String,User> userHashMap){
-
-
+    public Map<String, User> mapCompanyToUser(User user, Map<String, User> userHashMap) {
+        String key = user.getUserID() + user.getInsuranceCompany();
+        User addUserWithLatestVersion = userHashMap.get(key);
+        if (addUserWithLatestVersion != null && addUserWithLatestVersion.getVersion() < user.getVersion()) {
+            userHashMap.replace(key, user);
+        } else {
+            userHashMap.put(key, user);
+        }
+        return userHashMap;
     }
+
 
 }

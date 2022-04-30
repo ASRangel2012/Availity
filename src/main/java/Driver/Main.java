@@ -61,16 +61,18 @@ public class Main {
         List<User> userList = CSVParser.readCSVFile(); // reads whole file
 
         helper.filterList(userList); //filters the null, empty fields
-
+        userList.addAll(userHashMap.values());
         System.out.println(userList.size());
-
+        System.out.println(userHashMap.values());
        companyList = helper.filerByInsuranceCompany(userList, companyList);
        companyList = companyList.stream().sorted().collect(Collectors.toList());
 
        System.out.println(companyList);
        System.out.println(userList.size());
-
-
+       for(User user:userList){
+           helper.mapCompanyToUser(user,userHashMap);
+       }
+       System.out.println(userHashMap);
     }
 
 
