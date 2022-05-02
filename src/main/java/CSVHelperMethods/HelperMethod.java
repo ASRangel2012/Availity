@@ -1,7 +1,9 @@
 package CSVHelperMethods;
 
 import Model.User;
+import com.opencsv.ICSVWriter;
 
+import java.io.StringWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,10 +22,11 @@ public class HelperMethod {
     }
 
 
-    public List<String> filerByInsuranceCompany(List<User> userList, List<String> companyList) {
+    public List<String> filterByInsuranceCompany(List<User> userList, List<String> companyList) {
         for (User user : userList)
             if (!(companyList.contains(user.getInsuranceCompany())))
                 companyList.add(user.getInsuranceCompany());
+            companyList = companyList.stream().sorted().collect(Collectors.toList());
         return companyList;
     }
 
@@ -35,8 +38,10 @@ public class HelperMethod {
         } else {
             userHashMap.put(key, user);
         }
+
         return userHashMap;
     }
+
 
 
 }

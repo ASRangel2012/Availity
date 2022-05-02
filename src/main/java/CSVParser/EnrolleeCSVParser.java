@@ -15,7 +15,7 @@ public class EnrolleeCSVParser {
      */
     public List<User> readCSVFile() throws FileNotFoundException {
 
-        FileReader reader = new FileReader("C:\\Users\\aylar\\OneDrive\\Documents\\GitHub\\Sandbox\\src\\main\\java\\Driver\\Enrollees_20220428.csv");
+        FileReader reader = new FileReader("C:\\Users\\ASRAn\\IdeaProjects\\Availity\\src\\main\\java\\Driver\\Enrollees_20220428.csv");
         CsvToBean<User> csvToBean = new CsvToBeanBuilder<User>(reader)
                 .withType(User.class)
                 .withIgnoreLeadingWhiteSpace(true)

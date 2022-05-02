@@ -5,19 +5,28 @@ import CSVParser.EnrolleeCSVParser;
 import CSVWriter.EnrolleeCSVWriter;
 import LISP_Validator.LispValidatorUsingDeque;
 import Model.User;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.Collections.*;
 
 
 public class Main {
     public static List<String> companyList = new ArrayList<String>();
     public static Map<String, User> userHashMap = new HashMap<>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
 
 //        String testLispCodeMethod = "(* 2 (cos 0) (+ 4 6))";
 //        String testLispCodeMethod2 = "5(+ 1 2)";
@@ -55,25 +64,42 @@ public class Main {
 
 
         EnrolleeCSVParser CSVParser = new EnrolleeCSVParser();
-        EnrolleeCSVWriter writer = new EnrolleeCSVWriter();
+        // EnrolleeCSVWriter writer = new EnrolleeCSVWriter();
         HelperMethod helper = new HelperMethod();
 
         List<User> userList = CSVParser.readCSVFile(); // reads whole file
 
-        helper.filterList(userList); //filters the null, empty fields
+        List<User> filteredUsers = helper.filterList(userList); //filters the null, empty fields
         userList.addAll(userHashMap.values());
         System.out.println(userList.size());
         System.out.println(userHashMap.values());
-       companyList = helper.filerByInsuranceCompany(userList, companyList);
-       companyList = companyList.stream().sorted().collect(Collectors.toList());
+        companyList = helper.filterByInsuranceCompany(userList, companyList);
+        System.out.println(companyList);
+        System.out.println(userList.size());
 
-       System.out.println(companyList);
-       System.out.println(userList.size());
-       for(User user:userList){
-           helper.mapCompanyToUser(user,userHashMap);
-       }
-       System.out.println(userHashMap);
+
+
+
+        for (User user : userList) {
+            helper.mapCompanyToUser(user, userHashMap);
+        }
+
+        for(String company: companyList){
+            FileWriter writer = new FileWriter(company + ".csv");
+            for (Map.Entry<String, User> entry : userHashMap.entrySet()) {
+                String s = entry.getKey();
+                User user = entry.getValue();
+
+                try {
+                    if(user.getInsuranceCompany().equals(company)){
+                        writer.write(String.valueOf(user));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
-
-
 }
+
