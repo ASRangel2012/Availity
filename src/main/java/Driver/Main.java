@@ -67,20 +67,22 @@ public class Main {
 
         List<User> finalList = new ArrayList<User>(userHashMap.values());
         helper.sortByLastName(finalList);
+        System.out.println(finalList);
 
         for(String company: companyList) {
             FileWriter writer = new FileWriter(company + ".csv");
-            writer.write("User ID,First Name,Last Name,Version,Insurance Company\n");
-
+            writer.write("User ID, First Name,Last Name,Version,Insurance Company\n");
             for (User user : finalList) {
                 try {
                     if (user.getInsuranceCompany().equals(company)) {
                         writer.write(user.toString());
                     }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+            writer.close();
         }
     }
 }
