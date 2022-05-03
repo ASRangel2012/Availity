@@ -75,21 +75,39 @@ public class Main {
             helper.mapCompanyToUser(user, userHashMap);
         }
 
-        for(String company: companyList){
+        List<User> finalList = new ArrayList<User>(userHashMap.values());
+        for(String company: companyList) {
             FileWriter writer = new FileWriter(company + ".csv");
-            for (Map.Entry<String, User> entry : userHashMap.entrySet()) {
-                String s = entry.getKey();
-                User user = entry.getValue();
+            writer.write("User ID,First Name,Last Name,Version,Insurance Company\n");
+            for (User user : finalList) {
                 try {
-                    if(user.getInsuranceCompany().equals(company)){
-                        writer.write(String.valueOf(user));
+                    if (user.getInsuranceCompany().equals(company)) {
+                        writer.write(user.toString());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
         }
+
+
+//        for(String company: companyList){
+//            FileWriter writer = new FileWriter(company + ".csv");
+//            for (Map.Entry<String, User> entry : userHashMap.entrySet()) {
+//                String s = entry.getKey();
+//                User user = entry.getValue();
+//                try {
+//
+//                    if(user.getInsuranceCompany().equals(company)){
+//                        writer.write(String.valueOf(user));
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//        }
+
     }
 }
 

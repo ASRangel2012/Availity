@@ -61,13 +61,12 @@ public class User {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("User{");
-        sb.append("UserID='").append(UserID).append('\'');
-        sb.append(", FirstName='").append(FirstName).append('\'');
-        sb.append(", LastName='").append(LastName).append('\'');
-        sb.append(", Version=").append(Version);
-        sb.append(", InsuranceCompany='").append(InsuranceCompany).append('\'');
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder("");
+        sb.append(" ").append(UserID).append('\'');
+        sb.append(",").append(FirstName).append('\'');
+        sb.append(",").append(LastName).append('\'');
+        sb.append(",").append(Version);
+        sb.append(",").append(InsuranceCompany);
         sb.append("\n");
         return sb.toString();
     }
