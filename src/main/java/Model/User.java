@@ -8,7 +8,7 @@ import java.util.Objects;
  * User Model class which represents Enrollee object
  * No constructor and binded columns with properties using OpenCSV
  */
-public class User {
+public class User implements Comparable{
 
     @CsvBindByName(column = "User ID")
     private String UserID;
@@ -79,4 +79,9 @@ public class User {
         return sb.toString();
     }
 
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }

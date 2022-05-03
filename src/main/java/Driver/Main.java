@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+
 public class Main {
     public static List<String> companyList = new ArrayList<String>();
     public static Map<String, User> userHashMap = new HashMap<>();
@@ -63,10 +64,14 @@ public class Main {
             helper.mapCompanyToUser(user, userHashMap);
         }
 
+
         List<User> finalList = new ArrayList<User>(userHashMap.values());
+        helper.sortByLastName(finalList);
+
         for(String company: companyList) {
             FileWriter writer = new FileWriter(company + ".csv");
             writer.write("User ID,First Name,Last Name,Version,Insurance Company\n");
+
             for (User user : finalList) {
                 try {
                     if (user.getInsuranceCompany().equals(company)) {

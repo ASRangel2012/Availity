@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Helper methods to filter,sort Enrollee Csv file
+ * Helper methods to filter,sort Enrollees
  */
 public class HelperMethod {
 
@@ -23,6 +23,10 @@ public class HelperMethod {
         return userList;
     }
 
+    public List<User> sortByLastName(List<User> userList){
+        userList.sort((Comparator.comparing(User::getLastName).thenComparing(User::getLastName)));
+        return userList;
+    }
 
     public List<String> filterByInsuranceCompany(List<User> userList, List<String> companyList) {
         for (User user : userList)
@@ -40,10 +44,6 @@ public class HelperMethod {
         } else {
             userHashMap.put(key, user);
         }
-
         return userHashMap;
     }
-
-
-
 }
