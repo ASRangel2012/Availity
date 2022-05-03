@@ -4,6 +4,10 @@ import com.opencsv.bean.CsvBindByName;
 
 import java.util.Objects;
 
+/**
+ * User Model class which represents Enrollee object
+ * No constructor and binded columns with properties using OpenCSV
+ */
 public class User {
 
     @CsvBindByName(column = "User ID")
@@ -17,7 +21,9 @@ public class User {
     @CsvBindByName(column = "Insurance Company")
     private String InsuranceCompany;
 
-
+/*
+    Getters and Setters for User Object
+ */
     public String getUserID() {
         return UserID;
     }
@@ -58,7 +64,9 @@ public class User {
         InsuranceCompany = insuranceCompany;
     }
 
-
+/*
+    Get toString representation of object
+ */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("");

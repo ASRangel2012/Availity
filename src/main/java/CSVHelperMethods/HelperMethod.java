@@ -7,7 +7,9 @@ import java.io.StringWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/**
+ * Helper methods to filter,sort Enrollee Csv file
+ */
 public class HelperMethod {
 
 

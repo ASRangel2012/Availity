@@ -2,25 +2,13 @@ package Driver;
 
 import CSVHelperMethods.HelperMethod;
 import CSVParser.EnrolleeCSVParser;
-import CSVWriter.EnrolleeCSVWriter;
 import LISP_Validator.LispValidatorUsingDeque;
 import Model.User;
-import com.opencsv.CSVWriter;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.*;
-
 
 public class Main {
     public static List<String> companyList = new ArrayList<String>();
@@ -89,7 +77,8 @@ public class Main {
                 }
             }
         }
-
+    }
+}
 
 //        for(String company: companyList){
 //            FileWriter writer = new FileWriter(company + ".csv");
@@ -108,6 +97,5 @@ public class Main {
 //
 //        }
 
-    }
-}
+
 
