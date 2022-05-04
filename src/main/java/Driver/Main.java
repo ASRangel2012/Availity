@@ -51,7 +51,7 @@ public class Main {
         System.out.println(LISP.isLISPCodeValid(null)); //checking for null string
         System.out.println(LISP.isLISPCodeValid("")); //checking for empty string
 
-
+        //------------------------Testing CSV Parsing & Writing----------------------
         EnrolleeCSVParser CSVParser = new EnrolleeCSVParser();
         HelperMethod helper = new HelperMethod();
 
@@ -64,14 +64,13 @@ public class Main {
             helper.mapCompanyToUser(user, userHashMap);
         }
 
-
         List<User> finalList = new ArrayList<User>(userHashMap.values());
         helper.sortByLastName(finalList);
         System.out.println(finalList);
 
         for(String company: companyList) {
             FileWriter writer = new FileWriter(company + ".csv");
-            writer.write("User ID, First Name,Last Name,Version,Insurance Company\n");
+            writer.write("User ID, Last Name,First Name,Version,Insurance Company\n");
             for (User user : finalList) {
                 try {
                     if (user.getInsuranceCompany().equals(company)) {

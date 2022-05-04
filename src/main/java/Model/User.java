@@ -71,8 +71,8 @@ public class User{
     public String toString() {
         final StringBuilder sb = new StringBuilder("");
         sb.append(" ").append(UserID);
-        sb.append(",").append(FirstName);
         sb.append(",").append(LastName);
+        sb.append(",").append(FirstName);
         sb.append(",").append(Version);
         sb.append(",").append(InsuranceCompany);
         sb.append("\n");
